@@ -1,0 +1,169 @@
+.home .navbar a {
+	text-decoration: none;
+	color: #eeeeee;
+	transition: ease 0.3s;
+}
+
+.home .navbar a:hover {
+	transition: ease 0.3s;
+	color: #ffd369;
+}
+
+.home .navbar h1 {
+	font-size: 5rem;
+	color: #54bab9;
+	cursor: default;
+}
+
+.home .navbar h2,
+.home .about h2 {
+	font-size: 3rem;
+}
+
+/* Navbar */
+
+.home .navbar {
+	padding-left: 3.5rem;
+	padding-right: 3.5rem;
+	position: sticky;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #393e46;
+	box-shadow: 0 0 20px 5px #393e46ee;
+	z-index: 100;
+}
+
+.home .navbar .nav-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 5rem;
+}
+
+.home .navbar .nav-item:last-child h2 {
+	color: #ffd369;
+	transition: ease 0.3s;
+}
+
+.home .navbar .nav-item:last-child h2:hover {
+	transition: ease 0.3s;
+	color: #54bab9;
+}
+
+/* Home / Hero */
+
+.home .hero {
+	margin: 1em auto;
+	margin-top: 0.7em;
+	padding: 1em;
+	text-align: center;
+	height: 80vh;
+	width: 80vw;
+	color: #222831;
+	background-color: #eeeee0;
+	border: solid 10px #393e46;
+	border-radius: 20px;
+	font-size: 4.2rem;
+	font-weight: 600;
+}
+
+.home .hero form {
+	margin-top: 4rem;
+	margin-bottom: 4rem;
+	font-size: 3rem;
+	font-weight: 500;
+	display: flex;
+	flex-direction: column;
+	padding-left: 30rem;
+	align-items: flex-start;
+	gap: 4rem;
+}
+
+.home .hero form div label:hover,
+.home #first,
+.home #second,
+.home #third {
+	cursor: pointer;
+}
+
+.home .hero input[type='checkbox'] {
+	width: 2rem;
+	height: 2rem;
+	margin-right: 2rem;
+}
+
+.home .hero input[type='checkbox']:checked {
+	accent-color: #ffd369;
+}
+
+.home .hero label {
+	transition: ease 500ms;
+}
+
+.home .hero input[type='checkbox']:checked + label {
+	color: #ffd369;
+	text-decoration: line-through;
+	font-style: italic;
+	transition: ease 0.3s;
+}
+
+.home .hero span {
+	display: inline-block;
+	transform: scale(-1, 1);
+	-moz-transform: scale(-1, 1);
+	-webkit-transform: scale(-1, 1);
+	-o-transform: scale(-1, 1);
+	-ms-transform: scale(-1, 1);
+	transform: scale(-1, 1);
+}
+
+/* About */
+
+.home .about {
+	min-height: 50vh;
+	width: 50vw;
+	margin: 20vh auto;
+	background-color: #eeeee0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	border-radius: 20px;
+	border: 5px solid #222831;
+}
+
+.home .about p {
+	padding: 3rem;
+}
+
+.home .about .icons {
+	display: flex;
+	flex-direction: row;
+	gap: 10rem;
+}
+.home .about .icons svg {
+	color: #393e46;
+	transition: ease 0.5s;
+}
+
+.home .about .icons svg:hover {
+	border-radius: 5px;
+	transition: ease 0.3s;
+}
+
+.home .about .icons #what:hover {
+	color: #1f9e13;
+}
+.home .about .icons #gmail:hover {
+	color: #e94134;
+}
+
+.home .about .icons #git:hover {
+	color: #000000;
+}
