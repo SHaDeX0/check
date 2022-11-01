@@ -1,16 +1,18 @@
-import express, { json } from 'express'
-import { connect } from 'mongoose'
-import cors from 'cors'
-import { getAll, createUser, login, isLoggedIn } from './utils/Methods.js'
-import cookieParser from 'cookie-parser'
-import bodyParser from 'body-parser'
-import session from 'express-session'
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
+const { getAll, createUser, login, isLoggedIn, logout, updateList } = require('./utils/Methods.js')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const dotenv = require('dotenv')
 
+dotenv.config()
 const app = express()
-app.use(json())
+app.use(express.json())
 app.use(
 	cors({
-		origin: ['http://localhost:3000'],
+		origin: ['https://shadex-check.netlify.app', 'http://localhost:3000'],
 		methods: ['GET', 'POST'],
 		credentials: true,
 	})
@@ -20,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(
 	session({
 		key: 'user',
-		secret: 'SHaDeX',
+		secret: 'ThisIsAVeryBigSecretKeyThatIAmKeepingJustDontLoseItUnderstoodYesUnderstood',
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
@@ -29,15 +31,20 @@ app.use(
 	})
 )
 
-connect('mongodb+srv://root:root@check.zkip0sa.mongodb.net/check?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://root:root@check.zkip0sa.mongodb.net/check?retryWrites=true&w=majority')
 
 app.get('/getUsers', getAll)
 
 app.post('/createUser', createUser)
 
 app.post('/login', login)
+
 app.get('/login', isLoggedIn)
 
-app.listen(5000, () => {
+app.get('/logout', logout)
+
+app.post('/updateList', updateList)
+
+app.listen(process.env.PORT || 5000, () => {
 	console.log('Server running on port 5000...')
 })

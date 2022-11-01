@@ -13,8 +13,8 @@ const Home = () => {
 	useEffect(() => {
 		Axios.get('http://localhost:5000/login')
 			.then(res => {
-				console.log(res.data.user._id)
-				nav('/checklist')
+				console.log(res.data)
+				if (res.data.loggedIn) nav('/checklist')
 			})
 			.catch(err => {
 				console.log(err)

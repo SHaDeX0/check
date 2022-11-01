@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
 import './Signup.css'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 export class Signup extends Component {
 	constructor() {
 		super()
 		this.state = {
 			email: '',
+			name: '',
 			password: '',
 			repassword: '',
 			err: false,
@@ -17,8 +18,8 @@ export class Signup extends Component {
 		Axios.defaults.withCredentials = true
 		Axios.get('http://localhost:5000/login')
 			.then(res => {
-				console.log(res.data.user._id)
-				this.setState({ redirect: true })
+				console.log(res.data)
+				if (res.data.loggedIn) this.setState({ redirect: true })
 			})
 			.catch(err => {
 				console.log(err)
@@ -28,7 +29,8 @@ export class Signup extends Component {
 	validator = e => {
 		e.preventDefault()
 		console.log(this.state)
-		if (this.state.email === '' || this.state.password === '' || this.state.repassword === '') return
+		if (this.state.email === '' || this.state.password === '' || this.state.name === '' || this.state.repassword === '')
+			return
 		if (this.state.password !== this.state.repassword) {
 			this.setState({ err: "Passwords don't match" })
 			return
@@ -36,7 +38,11 @@ export class Signup extends Component {
 			this.setState({ err: false })
 		}
 
-		Axios.post('http://localhost:5000/createUser', { _id: this.state.email, password: this.state.password })
+		Axios.post('http://localhost:5000/createUser', {
+			_id: this.state.email,
+			name: this.state.name,
+			password: this.state.password,
+		})
 			.then(({ data }) => {
 				if (data.err) {
 					this.setState({ err: data.err, suc: false })
@@ -58,6 +64,12 @@ export class Signup extends Component {
 					{this.state.redirect ? <Navigate to={'/checklist'} replace={true} /> : null}
 					<form onSubmit={this.validator}>
 						<input
+							type={'text'}
+							placeholder='Your Name'
+							required
+							onChange={e => this.setState({ name: e.target.value })}
+						/>
+						<input
 							type={'email'}
 							placeholder='Email'
 							required
@@ -77,6 +89,9 @@ export class Signup extends Component {
 						/>
 						<button>Sign Up</button>
 					</form>
+					<Link to={'/login'}>
+						<p>Already have an account?</p>
+					</Link>
 				</div>
 			</div>
 		)

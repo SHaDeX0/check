@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Login.css'
 import Axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
 	const [email, setEmail] = useState('')
@@ -33,8 +33,8 @@ const Login = () => {
 	useEffect(() => {
 		Axios.get('http://localhost:5000/login')
 			.then(res => {
-				console.log(res.data.user._id)
-				nav('/checklist')
+				console.log(res.data)
+				if (res.data.loggedIn) nav('/checklist')
 			})
 			.catch(err => {
 				console.log(err)
@@ -52,6 +52,9 @@ const Login = () => {
 					<input type={'password'} placeholder='Password' required onChange={e => setPassword(e.target.value)} />
 					<button>Log In</button>
 				</form>
+				<Link to='/register'>
+					<p>Don't have an account?</p>
+				</Link>
 			</div>
 		</div>
 	)

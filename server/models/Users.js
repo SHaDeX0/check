@@ -1,7 +1,11 @@
-import { Schema, model } from 'mongoose'
+const { Schema, model } = require('mongoose')
 
 const Users = new Schema({
 	_id: {
+		type: String,
+		required: true,
+	},
+	name: {
 		type: String,
 		required: true,
 	},
@@ -9,7 +13,11 @@ const Users = new Schema({
 		type: String,
 		required: true,
 	},
+	checklist: {
+		type: Array,
+		required: true,
+	},
 })
 
 const UserModel = model('users', Users)
-export default UserModel
+module.exports = UserModel
