@@ -5,9 +5,7 @@ const { getAll, createUser, login, isLoggedIn, logout, updateList } = require('.
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const dotenv = require('dotenv')
 
-dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(
@@ -26,7 +24,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
-			expires: 24 * 60 * 60 * 1000,
+			expires: 7 * 24 * 60 * 60 * 1000,
 		},
 	})
 )
