@@ -5,12 +5,13 @@ const { getAll, createUser, login, isLoggedIn, logout, updateList } = require('.
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+require('dotenv').config()
 
 const app = express()
 app.use(express.json())
 app.use(
 	cors({
-		origin: ['https://shadex-check.netlify.app', 'http://localhost:3000'],
+		origin: ['http://localhost:3000'],
 		methods: ['GET', 'POST'],
 		credentials: true,
 	})
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(
 	session({
 		key: 'user',
-		secret: 'ThisIsAVeryBigSecretKeyThatIAmKeepingJustDontLoseItUnderstoodYesUnderstood',
+		secret: process.env.SECRET,
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
@@ -29,7 +30,7 @@ app.use(
 	})
 )
 
-mongoose.connect('mongodb+srv://root:root@check.zkip0sa.mongodb.net/check?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING)
 
 app.get('/getUsers', getAll)
 
@@ -43,6 +44,6 @@ app.get('/logout', logout)
 
 app.post('/updateList', updateList)
 
-app.listen(process.env.PORT || 5000, () => {
-	console.log('Server running on port 5000...')
+app.listen(process.env.PORT, () => {
+	console.log(`Server running on port ${process.env.PORT}...`)
 })
